@@ -29,8 +29,12 @@
   height: 100vh;
   width: 100%;
   background-color: gray;
+}
+
+
+/* Give flex display */
+.flex {
   display: flex !important;
   justify-content: center;
   align-items: center;
 }
-
