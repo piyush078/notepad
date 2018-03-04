@@ -1,0 +1,36 @@
+/**
+ * index.css
+ *
+ * This is the main stylesheet of the application.
+ * It defines the basic styling properties to the elements.
+ */
+
+/* Small devices (portrait phones, phones, less than 768px) */
+@media (max-width: 767.98px) {
+  html {
+    font-size: 0.9rem;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  html {
+    font-size: 1.2rem;
+  }
+}
+
+.display-5 {
+  font-size: 2.75rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+#window-cover {
+  height: 100vh;
+  width: 100%;
+  background-color: gray;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
