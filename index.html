@@ -10,15 +10,70 @@
     <!-- Bootstrap CSS, index.css -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/display.css">
   </head>
   <body>
 
     <!-- Window cover to show error and block any interaction -->
-    <div id="window-cover" class="d-none">
+    <div id="window-cover">
       <div class="text-white text-center container">
         <div class="mb-2"><i class="fas fa-wrench fa-3x"></i></div>
         <div class="window-cover-title display-5 font-weight-light mb-2"></div>
         <div class="window-cover-body h4 font-weight-normal"></div>
+      </div>
+    </div>
+
+    <!-- Header of the application -->
+    <div id="n-header" class="text-center mt-3">
+      <div class="n-header-title display-5">Notepad</div>
+    </div>
+
+    <!-- Content of the application -->
+    <div class="n-content mt-3">
+
+      <!-- New note content -->
+      <div class="n-block-title" data-target="#n-content-input-area" data-toggle="collapse">
+        <div class="row">
+          <div class="n-content-input-header col-8">Write</div>
+          <div class="n-content-input-icon col-4 text-right"><i class="fas fa-save"></i></div>
+        </div>
+      </div>
+      <div id="n-content-input-area" class="collapse show">
+        <textarea class="n-content-input" rows="6" placeholder="Pen it down.."></textarea>
+      </div>
+
+      <!-- Previous notes -->
+      <div class="n-block-title">
+        <div class="row">
+          <div class="n-content-list-header col-8">Notes</div>
+          <div class="n-content-list-icon col-4 text-right"><i class="fas fa-caret-up"></i></div>
+        </div>
+      </div>
+
+      <!-- List of the notes -->
+      <div class="n-content-list-area">
+
+        <!-- List items -->
+        <div class="n-content-list-item">
+          <div class="n-content-list-item-header">
+            <div class="row">
+              <div class="n-content-list-item-title col-8 text-truncate" data-toggle="collapse" data-target="#note-123456789">Hely</div>
+              <div class="n-content-list-item-icon col-4 text-right"><i class="fas fa-trash-alt"></i></div>
+            </div>
+          </div>
+          <div id="note-123456789" class="collapse hide mt-2">Dapibus ac facilisis in</div>
+        </div>
+
+        <div class="n-content-list-item">
+          <div class="n-content-list-item-header">
+            <div class="row">
+              <div class="n-content-list-item-title col-8 text-truncate" data-toggle="collapse" data-target="#note-123456798">Hely</div>
+              <div class="n-content-list-item-icon col-4 text-right"><i class="fas fa-trash-alt"></i></div>
+            </div>
+          </div>
+          <div id="note-123456798" class="collapse hide mt-2">Hey dude what up</div>
+        </div>
+
       </div>
     </div>
 

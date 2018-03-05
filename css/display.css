@@ -1,0 +1,20 @@
+/**
+ * display.css
+ *
+ * This stylesheet styles the elements for a good user interface.
+ */
+
+.n-header-title {
+  font-family: "Raleway", sans-serif;
+}
+
+.n-content-input {
+  width: 100%;
+  border-radius: 5px;
+  resize: none;
+  outline: 0;
+  padding: 0.75rem 1rem;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #6c757d;
+}

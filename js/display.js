@@ -20,8 +20,7 @@ function displayWindowCover (windowCoverElementID, messageObject) {
   let bodyElementSelector = selector.find ("." + windowCoverElementID + "-body");
 
   // change class of the cover element and fill text in the children
-  selector.removeClass ("d-none").addClass ("d-block");
-  selector.addClass ("flex");
+  selector.removeClass ("d-none").addClass ("flex");
   titleElementSelector.text (messageObject.title || DEFAULT_ERROR_TITLE);
   bodyElementSelector.text (messageObject.body || DEFAULT_ERROR_BODY);
 }
