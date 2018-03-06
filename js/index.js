@@ -36,21 +36,46 @@ function isLocalStorageAvailable (type) {
   }
 }
 
-$(document).ready (function () {
+/**
+ * Handle the no local storage error.
+ */
+function noLocalStorageError () {
+
+  // message to be shown on the window cover
+  let messageObject = {
+    title: "Need to stay updated",
+    body: "Your browser does not support Notepad. Please update your browser."
+  };
+
+  // show window cover element
+  let windowCoverElementID = "window-cover";
+  displayWindowCover (windowCoverElementID, messageObject);
+}
+
+/**
+ * Load the event listeners and UI functions.
+ */
+function loadResources () {
+
+  // classes and id of the buttons and textarea
+  let saveButtonClass = "n-content-input-icon";
+  let deleteButtonClass = "n-content-list-item-icon";
+  let textareaClass = "n-content-input";
+
+/*
+  // associate event listeners to the buttons
+  $ ("." + saveButtonClass).on ("click", saveNewNote);
+  $ ("." + deleteButtonClass).on ("click", deleteNote);
+*/
+
+  // load transitions and motion events
+  loadTransitionsAndMotion (saveButtonClass, textareaClass);
+}
+
+$ (document).ready (function () {
 
   // check if the local storage API is supported on the browser
-  if (! isLocalStorageAvailable ('localStorage')) {
-
-    // message to be shown on the window cover
-    let messageObject = {
-      title: "Need to stay updated",
-      body: "Your browser does not support Notepad. Please update your browser."
-    };
-
-    let windowCoverElementID = "window-cover";
-    displayWindowCover (windowCoverElementID, messageObject);
-
-  } else {
-    console.log ("Supported");
-  }
+  isLocalStorageAvailable ('localStorage') 
+    ? loadResources () 
+    : noLocalStorageError ();
 });
