@@ -13,6 +13,16 @@
  */
 var DEFAULT_ERROR_TITLE = "Error";
 var DEFAULT_ERROR_BODY = "Something went wrong. Please try again later.";
+var STORAGE_KEY = "notes";
+
+/**
+ * Return the text of the new note.
+ *
+ * @return string {textareaText} is the text of the new note
+ */
+function getNewNoteText () {
+  return $ (".n-content-input").val ().trim ();
+}
 
 /**
  * Detect if the browser supports the local storage.
@@ -62,11 +72,9 @@ function loadResources () {
   let deleteButtonClass = "n-content-list-item-icon";
   let textareaClass = "n-content-input";
 
-/*
   // associate event listeners to the buttons
-  $ ("." + saveButtonClass).on ("click", saveNewNote);
+  $ ("." + saveButtonClass).on ("click", writeNote);
   $ ("." + deleteButtonClass).on ("click", deleteNote);
-*/
 
   // load transitions and motion events
   loadTransitionsAndMotion (saveButtonClass, textareaClass);
