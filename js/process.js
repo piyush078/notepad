@@ -37,3 +37,28 @@ function writeNote () {
 }
 
 function deleteNote () {}
+
+/**
+ * Display the error in the error container.
+ *
+ * @param Object {errorContainerSelector} is bound to the function and is the 
+ *               jQuery selector of the error container
+ * @param string {errorText} is the text to be displayed
+ */
+function showError (errorText) {
+
+  // get the element where error is to be shown
+  let errorContainerSelector = this;
+  let errorTextContainer = errorContainerSelector.children ().children ();
+  let waitingTime = 2500;
+
+  // fill the value into the error text area
+  errorTextContainer.html (errorText);
+
+  // explicit click the error container to show the error text container
+  // show the error for some time and then hide it
+  errorContainerSelector.click ();
+  setTimeout (function () {
+    errorContainerSelector.click ();
+  }, waitingTime);
+}

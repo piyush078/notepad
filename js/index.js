@@ -63,22 +63,45 @@ function noLocalStorageError () {
 }
 
 /**
+ * Handle the save button click event and save the new note.
+ *
+ * @param string {textareaClass} is the class of the textarea
+ */
+function handleSavingNote (textareaClass) {
+
+  // show error if the new note could not be saved
+  // empty the textarea if saving is successful
+  if (! writeNote ()) {
+    let errorText = "The new note could not be saved.";
+    showErrorFunction (errorText);
+  } else {
+    $ ("." + textareaClass).val ("");
+  }
+}
+
+/**
  * Load the event listeners and UI functions.
  */
 function loadResources () {
 
-  // classes and id of the buttons and textarea
+  // classes and id of the buttons, textarea and error container
   let saveButtonClass = "n-content-input-icon";
   let deleteButtonClass = "n-content-list-item-icon";
   let textareaClass = "n-content-input";
+  let errorContainerID = "error-container";
+  let errorContainerSelector = $ ("#" + errorContainerID);
+
+  // bind the error container to the showError function
+  let showErrorFunction = showError.bind (errorContainerSelector);
 
   // associate event listeners to the buttons
-  $ ("." + saveButtonClass).on ("click", writeNote);
+  $ ("." + saveButtonClass).on ("click", () => handleSavingNote (textareaClass));
   $ ("." + deleteButtonClass).on ("click", deleteNote);
 
   // load transitions and motion events
   loadTransitionsAndMotion (saveButtonClass, textareaClass);
 }
+
 
 $ (document).ready (function () {
 
