@@ -65,9 +65,10 @@ function noLocalStorageError () {
 /**
  * Handle the save button click event and save the new note.
  *
- * @param string {textareaClass} is the class of the textarea
+ * @param string   {textareaClass} is the class of the textarea
+ * @param function {showErrorFunction} is the function to show error
  */
-function handleSavingNote (textareaClass) {
+function handleSavingNote (textareaClass, showErrorFunction) {
 
   // show error if the new note could not be saved
   // empty the textarea if saving is successful
@@ -95,7 +96,7 @@ function loadResources () {
   let showErrorFunction = showError.bind (errorContainerSelector);
 
   // associate event listeners to the buttons
-  $ ("." + saveButtonClass).on ("click", () => handleSavingNote (textareaClass));
+  $ ("." + saveButtonClass).on ("click", () => handleSavingNote (textareaClass, showErrorFunction));
   $ ("." + deleteButtonClass).on ("click", deleteNote);
 
   // load transitions and motion events
