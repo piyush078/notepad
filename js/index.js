@@ -65,7 +65,7 @@ function noLocalStorageError () {
 /**
  * Handle the save button click event and save the new note.
  *
- * @param string   {textareaClass} is the class of the textarea
+ * @param string {textareaClass} is the class of the textarea
  * @param function {showErrorFunction} is the function to show error
  */
 function handleSavingNote (textareaClass, showErrorFunction) {
@@ -81,23 +81,49 @@ function handleSavingNote (textareaClass, showErrorFunction) {
 }
 
 /**
+ * Handle the delete button click event and delete the selected note.
+ *
+ * @param Object {this} is bound to the function and is the selected note item element
+ *               in the list of notes
+ * @param function {showErrorFunction} is the function to show error
+ */
+function handleDeleteNote (showErrorFunction) {
+
+  // get the id of the note item
+  let noteItemElement = this;
+  let noteItemID = noteItemElement.attr ("n-id");
+  if (! deleteNote (noteItemID)) {
+    let errorText = "The selected note could not be deleted.";
+    showErrorFunction (errorText);
+  } else {
+    noteItemElement.remove ();
+  }
+}
+
+/**
  * Load the event listeners and UI functions.
  */
 function loadResources () {
 
-  // classes and id of the buttons, textarea and error container
+  // classes and id of the buttons, textarea, error container and note item
   let saveButtonClass = "n-content-input-icon";
   let deleteButtonClass = "n-content-list-item-icon";
   let textareaClass = "n-content-input";
   let errorContainerID = "error-container";
-  let errorContainerSelector = $ ("#" + errorContainerID);
+  let noteItemClass = "n-content-list-item";
 
   // bind the error container to the showError function
+  let errorContainerSelector = $ ("#" + errorContainerID);
   let showErrorFunction = showError.bind (errorContainerSelector);
+
+  // ADD THE FUNCTION TO THE PROTOTYPE PROPERTY OF STORAGE
+  Storage.prototype.handle = handleLocalStorageData;
 
   // associate event listeners to the buttons
   $ ("." + saveButtonClass).on ("click", () => handleSavingNote (textareaClass, showErrorFunction));
-  $ ("." + deleteButtonClass).on ("click", deleteNote);
+  $ ("." + deleteButtonClass).on ("click", function () {
+    handleDeleteNote.call (jQuery (this).parents ("." + noteItemClass), showErrorFunction);
+  });
 
   // load transitions and motion events
   loadTransitionsAndMotion (saveButtonClass, textareaClass);
