@@ -111,6 +111,7 @@ function loadResources () {
   let textareaClass = "n-content-input";
   let errorContainerID = "error-container";
   let noteItemClass = "n-content-list-item";
+  let notesListContainerClass = "n-content-list-area";
 
   // bind the error container to the showError function
   let errorContainerSelector = $ ("#" + errorContainerID);
@@ -119,14 +120,18 @@ function loadResources () {
   // ADD THE FUNCTION TO THE PROTOTYPE PROPERTY OF STORAGE
   Storage.prototype.handle = handleLocalStorageData;
 
-  // associate event listeners to the buttons
-  $ ("." + saveButtonClass).on ("click", () => handleSavingNote (textareaClass, showErrorFunction));
-  $ ("." + deleteButtonClass).on ("click", function () {
-    handleDeleteNote.call (jQuery (this).parents ("." + noteItemClass), showErrorFunction);
-  });
+  // load the notes onto the page
+  loadIntoTemplate (readNotes (), notesListContainerClass);
 
   // load transitions and motion events
   loadTransitionsAndMotion (saveButtonClass, textareaClass);
+
+  // associate event listeners to the buttons
+  $ ("." + saveButtonClass).on ("click", () => handleSavingNote (textareaClass, showErrorFunction));
+  $ ("." + deleteButtonClass).on ("click", function () {
+    console.log ("hey");
+    handleDeleteNote.call (jQuery (this).parents ("." + noteItemClass), showErrorFunction);
+  });
 }
 
 

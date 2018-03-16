@@ -39,7 +39,7 @@ function handleLocalStorageData (data = null) {
 function writeNote () {
   try {
 
-    // get the data from local storage    
+    // get the notes from the local storage    
     let newNoteText = getNewNoteText ();
     let notesData = localStorage.handle ();
     
@@ -66,7 +66,7 @@ function writeNote () {
 function deleteNote (noteID) {
   try {
 
-    // get the data from local storage
+    // get the notes from the local storage
     let notesData = localStorage.handle ();
 
     // check if the note id exists in the notes list
@@ -83,6 +83,23 @@ function deleteNote (noteID) {
 
   } catch (e) {
     return false;
+  }
+}
+
+/**
+ * Read the notes from the local storage.
+ *
+ * @return Object {notesList} is the list of the notes
+ */
+function readNotes () {
+  try {
+
+    // get the notes from the local storage
+    let notesData = localStorage.handle ();
+    return notesData;
+    
+  } catch (e) {
+    return {};
   }
 }
 
@@ -109,4 +126,24 @@ function showError (errorText) {
   setTimeout (function () {
     errorContainerSelector.click ();
   }, waitingTime);
+}
+
+/**
+ * Fetch the title from the notes text.
+ *
+ * @param string {noteText} is the text of the note.
+ */
+function fetchTitleFromNote (noteText) {
+
+  // limit of the title characters
+  let titleLimit = 60;
+
+  // get the first line from the note
+  let indexOfEndLine = noteText.indexOf ("\n");
+  let lengthOfNote = noteText.length;
+  if (indexOfEndLine === -1 || indexOfEndLine > titleLimit) {
+    return noteText.substr (0, titleLimit) + " ...";
+  } else {
+    return noteText.substr (0, indexOfEndLine) + " ...";
+  }
 }
