@@ -135,7 +135,7 @@ function loadResources () {
 
   // associate event listeners to the buttons
   $ ("." + saveButtonClass).on ("click", () => handleSavingNote (textareaClass, showErrorFunction, notesListContainerClass));
-  $ ("." + deleteButtonClass).on ("click", function () {
+  $ ("." + notesListContainerClass).on ("click", "." + deleteButtonClass, function () {
     handleDeleteNote.call (jQuery (this).parents ("." + noteItemClass), showErrorFunction);
   });
 }
