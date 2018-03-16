@@ -50,7 +50,11 @@ function writeNote () {
     // store the new value in local storage
     notesData [newNoteKey] = newNoteText;
     localStorage.handle (notesData);
-    return true;
+
+    // return the new note as an object
+    let feedback = {};
+    feedback [newNoteKey] = newNoteText;
+    return feedback;
 
   } catch (e) {
     return false;
@@ -101,31 +105,6 @@ function readNotes () {
   } catch (e) {
     return {};
   }
-}
-
-/**
- * Display the error in the error container.
- *
- * @param Object {this} is bound to the function and is the jQuery selector of
- *               the error container
- * @param string {errorText} is the text to be displayed
- */
-function showError (errorText) {
-
-  // get the element where error is to be shown
-  let errorContainerSelector = this;
-  let errorTextContainer = errorContainerSelector.children ().children ();
-  let waitingTime = 2500;
-
-  // fill the value into the error text area
-  errorTextContainer.html (errorText || DEFAULT_ERROR_BODY);
-
-  // explicit click the error container to show the error text container
-  // show the error for some time and then hide it
-  errorContainerSelector.click ();
-  setTimeout (function () {
-    errorContainerSelector.click ();
-  }, waitingTime);
 }
 
 /**

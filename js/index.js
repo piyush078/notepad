@@ -67,16 +67,21 @@ function noLocalStorageError () {
  *
  * @param string {textareaClass} is the class of the textarea
  * @param function {showErrorFunction} is the function to show error
+ * @param string {notesListContainerClass} is the class of the container element of the 
+ *               notes list
  */
-function handleSavingNote (textareaClass, showErrorFunction) {
+function handleSavingNote (textareaClass, showErrorFunction, notesListContainerClass) {
 
   // show error if the new note could not be saved
   // empty the textarea if saving is successful
-  if (! writeNote ()) {
+  let feedback = writeNote ();
+  if (! feedback) {
     let errorText = "The new note could not be saved.";
     showErrorFunction (errorText);
   } else {
     $ ("." + textareaClass).val ("");
+    console.log (feedback)
+    $ ("." + notesListContainerClass).prepend (loadIntoTemplate (feedback));
   }
 }
 
@@ -121,15 +126,16 @@ function loadResources () {
   Storage.prototype.handle = handleLocalStorageData;
 
   // load the notes onto the page
-  loadIntoTemplate (readNotes (), notesListContainerClass);
+  $ ("." + notesListContainerClass).html (
+    loadIntoTemplate (readNotes ())
+  );
 
   // load transitions and motion events
   loadTransitionsAndMotion (saveButtonClass, textareaClass);
 
   // associate event listeners to the buttons
-  $ ("." + saveButtonClass).on ("click", () => handleSavingNote (textareaClass, showErrorFunction));
+  $ ("." + saveButtonClass).on ("click", () => handleSavingNote (textareaClass, showErrorFunction, notesListContainerClass));
   $ ("." + deleteButtonClass).on ("click", function () {
-    console.log ("hey");
     handleDeleteNote.call (jQuery (this).parents ("." + noteItemClass), showErrorFunction);
   });
 }

@@ -24,6 +24,31 @@ function displayWindowCover (windowCoverElementID, messageObject) {
   bodyElementSelector.text (messageObject.body || DEFAULT_ERROR_BODY);
 }
 
+/**
+ * Display the error in the error container.
+ *
+ * @param Object {this} is bound to the function and is the jQuery selector of
+ *               the error container
+ * @param string {errorText} is the text to be displayed
+ */
+function showError (errorText) {
+
+  // get the element where error is to be shown
+  let errorContainerSelector = this;
+  let errorTextContainer = errorContainerSelector.children ().children ();
+  let waitingTime = 2500;
+
+  // fill the value into the error text area
+  errorTextContainer.html (errorText || DEFAULT_ERROR_BODY);
+
+  // explicit click the error container to show the error text container
+  // show the error for some time and then hide it
+  errorContainerSelector.click ();
+  setTimeout (function () {
+    errorContainerSelector.click ();
+  }, waitingTime);
+}
+
 /** 
  * Load the transitions and motion events to the elements.
  *
@@ -47,15 +72,13 @@ function loadTransitionsAndMotion (saveButtonClass, textareaClass) {
   });
 }
 
-
 /**
  * Load the notes list into template.
  *
- * @param Object {notesList} is the list of the notes
- * @param string {noteListContainerClass} is the class of the container element of the 
- *               notes list
+ * @param  Object {notesList} is the list of the notes
+ * @return string {content} is the list of notes to be shown on the page
  */
-function loadIntoTemplate (notesList, notesListContainerClass) {
+function loadIntoTemplate (notesList) {
 
   // content to be shown inside the notes list container
   let content = "";
@@ -76,6 +99,5 @@ function loadIntoTemplate (notesList, notesListContainerClass) {
       "</div>" + content;
   }
 
-  // show the content on the page
-  $ ("." + notesListContainerClass).html (content);
+  return content;
 }
