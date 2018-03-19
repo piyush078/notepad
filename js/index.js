@@ -80,7 +80,6 @@ function handleSavingNote (textareaClass, showErrorFunction, notesListContainerC
     showErrorFunction (errorText);
   } else {
     $ ("." + textareaClass).val ("");
-    console.log (feedback)
     $ ("." + notesListContainerClass).prepend (loadIntoTemplate (feedback));
   }
 }

@@ -66,8 +66,8 @@ function loadTransitionsAndMotion (saveButtonClass, textareaClass) {
 
     // content in the textarea and toggle the save button based on the content
     let noteText = $ (this).val ().trim ();
-    saveButtonSelector.css ("display", function () {
-      return noteText ? "block" : "none";
+    saveButtonSelector.css ("display", () => {
+      return noteText ? "inline-block" : "none";
     });
   });
 }
@@ -91,11 +91,11 @@ function loadIntoTemplate (notesList) {
       "<div class='n-content-list-item' n-id='" + key + "'>" +
         "<div class='n-content-list-item-header'>" +
           "<div class='row'>" +
-            "<div class='n-content-list-item-title col-8 text-truncate' data-toggle='collapse' data-target='#" + key + "'>" + title + "</div>" +
-            "<div class='n-content-list-item-icon col-4 text-right'><i class='fas fa-trash-alt'></i></div>" + 
+            "<div class='n-content-list-item-title col-8 text-truncate cursor-pointer' data-toggle='collapse' data-target='#" + key + "' title='" + title + "'>" + title + "</div>" +
+            "<div class='col-4 text-right'><i class='n-content-list-item-icon fas fa-trash-alt cursor-pointer' title='Delete'></i></div>" + 
           "</div>" +
         "</div>" +
-        "<div id='" + key + "' class='collapse hide mt-2'>" + notesList [key].replace ("\n", "<br />") + "</div>" +
+        "<div id='" + key + "' class='collapse hide mt-1'>" + notesList [key].replace(/\n/g, "<br />") + "</div>" +
       "</div>" + content;
   }
 

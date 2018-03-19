@@ -25,8 +25,15 @@
       <!-- New note content -->
       <div class="n-block-title">
         <div class="row">
-          <div class="n-content-input-header col-8" data-target="#n-content-input-area" data-toggle="collapse">Write</div>
-          <div class="n-content-input-icon col-4 text-right" style="display: none;"><i class="fas fa-save"></i></div>
+          <div class="n-content-input-header col-8">Write</div>
+          <div class="col-4 text-right">
+            <span data-target="#n-content-input-area" data-toggle="collapse">
+              <i class="fas fa-caret-up cursor-pointer" ></i>
+            </span>
+            <span class="n-content-input-icon ml-2" style="display: none;" title="Save">
+              <i class="fas fa-save cursor-pointer"></i>
+            </span>
+          </div>
         </div>
       </div>
       <div id="n-content-input-area" class="collapse show">
@@ -37,12 +44,14 @@
       <div class="n-block-title">
         <div class="row">
           <div class="n-content-list-header col-8">Notes</div>
-          <div class="n-content-list-icon col-4 text-right"><i class="fas fa-caret-up"></i></div>
+          <div class="n-content-list-icon col-4 text-right">
+            <i class="fas fa-caret-up cursor-pointer" data-target="#n-content-list-area" data-toggle="collapse" title="Click to hide/show notes"></i>
+          </div>
         </div>
       </div>
 
       <!-- List of the notes -->
-      <div class="n-content-list-area"></div>
+      <div id="n-content-list-area" class="n-content-list-area collapse show"></div>
     </div>
 
     <!-- Window cover to show error and block any interaction -->
