@@ -110,12 +110,17 @@ function handleDeleteNote (showErrorFunction) {
 function loadResources () {
 
   // classes and id of the buttons, textarea, error container and note item
+  let titleClass = "n-header-title-text";
   let saveButtonClass = "n-content-input-icon";
   let deleteButtonClass = "n-content-list-item-icon";
   let textareaClass = "n-content-input";
   let errorContainerID = "error-container";
   let noteItemClass = "n-content-list-item";
   let notesListContainerClass = "n-content-list-area";
+
+  // varaibles for night mode feature
+  let isMorningModeOn = true;
+  let html = document.getElementsByTagName ("html") [0];
 
   // bind the error container to the showError function
   let errorContainerSelector = $ ("#" + errorContainerID);
@@ -131,6 +136,14 @@ function loadResources () {
 
   // load transitions and motion events
   loadTransitionsAndMotion (saveButtonClass, textareaClass);
+
+  // load the morning mode or night mode
+  $ ("." + titleClass).on ("click", () => {
+    isMorningModeOn = !isMorningModeOn;
+    html.style.setProperty ("--color", (isMorningModeOn ? "#000" : "#fff"));
+    html.style.setProperty ("--background", (isMorningModeOn ? "#fff" : "#141d26"));
+    html.style.setProperty ("--border", (isMorningModeOn ? "gray" : "white"));
+  });
 
   // associate event listeners to the buttons
   $ ("." + saveButtonClass).on ("click", () => handleSavingNote (textareaClass, showErrorFunction, notesListContainerClass));
