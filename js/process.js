@@ -48,6 +48,9 @@ function writeNote () {
     let newNoteKey = "note-" + timestamp.toString ();
     
     // store the new value in local storage
+    if (! newNoteText) {
+      throw new Exception;
+    }
     notesData [newNoteKey] = newNoteText;
     localStorage.handle (notesData);
 
