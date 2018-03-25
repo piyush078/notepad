@@ -101,3 +101,15 @@ function loadIntoTemplate (notesList) {
 
   return content;
 }
+
+/**
+ * Change the mode display.
+ *
+ * @param boolean {isMorningModeOn} is counter for morning mode
+ */
+function changeMode (isMorningModeOn) {
+  let html = document.getElementsByTagName ("html") [0];
+  html.style.setProperty ("--color", (isMorningModeOn ? "#000" : "#fff"));
+  html.style.setProperty ("--background", (isMorningModeOn ? "#fff" : "#141d26"));
+  html.style.setProperty ("--border", (isMorningModeOn ? "gray" : "white"));
+}

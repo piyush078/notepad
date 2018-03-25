@@ -129,3 +129,20 @@ function fetchTitleFromNote (noteText) {
     return noteText.substr (0, indexOfEndLine) + " ...";
   }
 }
+
+/**
+ * Set and get night mode counter in local storage.
+ *
+ * @param boolean {action} indicating the counter
+ * @return boolean {true|false} is the value in the local storage
+ */
+function handleMorningMode (action) {
+  
+  // for the first time set the morning mode to be true
+  if (localStorage.getItem (MODE_KEY) === null) {
+    localStorage.setItem (MODE_KEY, "y");
+  } 
+  action !== undefined && action !== null 
+    && localStorage.setItem (MODE_KEY, action ? "y" : "n");
+  return (localStorage.getItem (MODE_KEY) === "y");
+}

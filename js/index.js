@@ -14,6 +14,7 @@
 var DEFAULT_ERROR_TITLE = "Error";
 var DEFAULT_ERROR_BODY = "Something went wrong. Please try again later.";
 var STORAGE_KEY = "notes";
+var MODE_KEY = "mode";
 
 /**
  * Return the text of the new note.
@@ -120,8 +121,7 @@ function loadResources () {
   let notesListContainerClass = "n-content-list-area";
 
   // varaibles for night mode feature
-  let isMorningModeOn = true;
-  let html = document.getElementsByTagName ("html") [0];
+  let isMorningModeOn;
 
   // bind the error container to the showError function
   let errorContainerSelector = $ ("#" + errorContainerID);
@@ -140,10 +140,9 @@ function loadResources () {
 
   // load the morning mode or night mode
   $ ("." + titleClass).on ("click", () => {
-    isMorningModeOn = !isMorningModeOn;
-    html.style.setProperty ("--color", (isMorningModeOn ? "#000" : "#fff"));
-    html.style.setProperty ("--background", (isMorningModeOn ? "#fff" : "#141d26"));
-    html.style.setProperty ("--border", (isMorningModeOn ? "gray" : "white"));
+    changeMode (
+      handleMorningMode (! isMorningModeOn)
+    );
   });
 
   // associate event listeners to the buttons
@@ -151,6 +150,12 @@ function loadResources () {
   $ ("." + notesListContainerClass).on ("click", "." + deleteButtonClass, function () {
     handleDeleteNote.call (jQuery (this).parents ("." + noteItemClass), showErrorFunction);
   });
+
+  // check if morning mode is already on
+  isMorningModeOn = handleMorningMode ();
+  if (! isMorningModeOn) {
+    changeMode (isMorningModeOn);
+  }
 }
 
 
